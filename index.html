@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bhaskara">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhaskara</title>
+
+    <script src="lib/angularjs_1.8.2/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/bhaskaraCtrl.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+    <div ng-controller="bhaskaraCtrl" class="h-100 p-5 bg-light border rounded-3 text-center">
+        <h1>Bhaskara Online</h1>
+        <div class="formula">{{formula.a || 0}}x² + {{formula.b || 0}}x + {{formula.c || 0}} = 0</div>
+        <form name="contatoForm" class="form">
+            <input class="form-control" type="number" name="valor_a" ng-model="formula.a" placeholder="A"/>
+            <input class="form-control" type="number" name="valor_b" ng-model="formula.b" placeholder="B"/>
+            <input class="form-control" type="number" name="valor_c" ng-model="formula.c" placeholder="C"/>
+        </form>
+        <div class="formula" ng-if="formula.a != 0">Δ = {{formula.b || 0}}² - 4*{{formula.a || 0}}*{{formula.c || 0}}</div>
+        <div class="formula" >Δ = {{getDelta((formula.a || 0), (formula.b || 0), (formula.c || 0))}}</div>
+        <div class="formula" ng-if="bhask.delta >= 0">X = (-{{formula.b || 0}} ± √{{delta || 0}}) / ( 2 * {{formula.a || 0}})</div>
+        <div class="resultado" ng-if="bhask.delta > 0">Há dois valores reais para a equação: {{bhask.valX[0]}} ou {{bhask.valX[1]}}</div>
+        <div class="resultado" ng-if="bhask.delta == 0">Há um valor real para a equação: {{bhask.valX[0] || 0}}</div>
+        <div class="resultado" ng-if="bhask.delta < 0">Não há valores reais para a equação.</div>
+    </div>
+</body>
+</html>
